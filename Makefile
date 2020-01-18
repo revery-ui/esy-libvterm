@@ -93,7 +93,7 @@ clean:
 	$(LIBTOOL) --mode=clean rm -f $(LIBRARY) $(BINFILES)
 
 .PHONY: install
-install: install-inc install-lib install-bin
+install: install-inc install-lib 
 
 install-inc:
 	install -d $(DESTDIR)$(INCDIR)

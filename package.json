@@ -29,5 +29,7 @@
         }
     }
   },
-  "dependencies": { }
+  "dependencies": { 
+    "esy-libtools": "github:esy-packages/esy-libtools#0fe7687"
+  }
 }
