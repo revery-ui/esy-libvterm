@@ -14,8 +14,6 @@ jobs:
   pool:
     vmImage: 'macOS 10.13'
   steps:
-  - script: brew update
-  - script: brew install libtool
   - template: .ci/esy-build-steps.yml
 
 - job: MacOS14

@@ -1,8 +1,10 @@
-ifeq ($(shell uname),Darwin)
-  LIBTOOL ?= glibtool
-else
-  LIBTOOL ?= libtool
-endif
+#ifeq ($(shell uname),Darwin)
+#  LIBTOOL ?= glibtool
+#else
+#  LIBTOOL ?= libtool
+#endif
+
+LIBTOOL=libtool
 
 ifneq ($(VERBOSE),1)
   LIBTOOL +=--quiet
