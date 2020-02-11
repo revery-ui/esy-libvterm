@@ -1,10 +1,8 @@
-#ifeq ($(shell uname),Darwin)
-#  LIBTOOL ?= glibtool
-#else
-#  LIBTOOL ?= libtool
-#endif
-
-LIBTOOL=libtool
+ifeq ($(shell uname),Darwin)
+  LIBTOOL ?= glibtool
+else
+  LIBTOOL ?= libtool
+endif
 
 ifneq ($(VERBOSE),1)
   LIBTOOL +=--quiet
@@ -54,6 +52,7 @@ MANDIR=$(PREFIX)/share/man
 MAN3DIR=$(MANDIR)/man3
 
 all: $(LIBRARY) $(BINFILES)
+	@echo Using libtool $(LIBTOOL)
 
 $(LIBRARY): $(OBJECTS)
 	@echo LINK $@
