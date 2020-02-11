@@ -21,8 +21,6 @@ jobs:
   pool:
     vmImage: 'macOS 10.14'
   steps:
-  - script: brew update
-  - script: brew install glibtool
   - template: .ci/esy-build-steps.yml
 
 - job: Windows
