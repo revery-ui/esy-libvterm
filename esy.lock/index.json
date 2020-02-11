@@ -1,5 +1,5 @@
 {
-  "checksum": "4664e61e96242b81fa796e61d6a15d36",
+  "checksum": "1985e38e925e5d15d3f0d221420bbdfb",
   "root": "esy-libvterm@link-dev:./package.json",
   "node": {
     "texinfo@github:esy-packages/esy-texinfo#4a05feafbbcc4c57d5d25899fbdab98961b9a69c@d41d8cd9": {
@@ -29,17 +29,17 @@
       },
       "overrides": [],
       "dependencies": [
-        "esy-libtools@github:bryphe/esy-libtools#62d1904@d41d8cd9"
+        "esy-libtools@github:bryphe/esy-libtools#62766a2@d41d8cd9"
       ],
       "devDependencies": []
     },
-    "esy-libtools@github:bryphe/esy-libtools#62d1904@d41d8cd9": {
-      "id": "esy-libtools@github:bryphe/esy-libtools#62d1904@d41d8cd9",
+    "esy-libtools@github:bryphe/esy-libtools#62766a2@d41d8cd9": {
+      "id": "esy-libtools@github:bryphe/esy-libtools#62766a2@d41d8cd9",
       "name": "esy-libtools",
-      "version": "github:bryphe/esy-libtools#62d1904",
+      "version": "github:bryphe/esy-libtools#62766a2",
       "source": {
         "type": "install",
-        "source": [ "github:bryphe/esy-libtools#62d1904" ]
+        "source": [ "github:bryphe/esy-libtools#62766a2" ]
       },
       "overrides": [],
       "dependencies": [
