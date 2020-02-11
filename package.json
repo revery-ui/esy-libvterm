@@ -5,10 +5,7 @@
   "license": "MIT",
   "esy": {
     "build": [
-        ["bash", "-c", "#{os == 'windows' ? 'PREFIX=$cur__install CC=x86_64-w64-mingw32-gcc make install' : 'echo'}"],
-        ["bash", "-c", "#{os == 'darwin' ? 'PREFIX=$cur__install make' : 'echo'}"],
-        ["bash", "-c", "#{os == 'macOS' ? 'PREFIX=$cur__install make' : 'echo'}"],
-        ["bash", "-c", "#{os == 'linux' ? 'PREFIX=$cur__install make' : 'echo'}"]
+        ["bash", "-c", "PREFIX=$cur__install #{os == 'windows' ? 'CC=x86_64-w64-mingw32-gcc' : ''} make install"]
     ],
     "install": [
         "PREFIX=$cur__install make"
@@ -29,5 +26,7 @@
         }
     }
   },
-  "dependencies": { }
+  "dependencies": { 
+    "esy-libtools": "github:bryphe/esy-libtools#62766a2"
+  }
 }

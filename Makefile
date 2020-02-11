@@ -52,6 +52,7 @@ MANDIR=$(PREFIX)/share/man
 MAN3DIR=$(MANDIR)/man3
 
 all: $(LIBRARY) $(BINFILES)
+	@echo Using libtool $(LIBTOOL)
 
 $(LIBRARY): $(OBJECTS)
 	@echo LINK $@
@@ -93,7 +94,7 @@ clean:
 	$(LIBTOOL) --mode=clean rm -f $(LIBRARY) $(BINFILES)
 
 .PHONY: install
-install: install-inc install-lib install-bin
+install: install-inc install-lib 
 
 install-inc:
 	install -d $(DESTDIR)$(INCDIR)
