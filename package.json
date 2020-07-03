@@ -1,6 +1,6 @@
 {
   "name": "@revery/esy-libvterm",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Esy-enabled libvterm build",
   "license": "MIT",
   "esy": {
