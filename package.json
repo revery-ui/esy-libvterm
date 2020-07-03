@@ -26,6 +26,6 @@
     }
   },
   "dependencies": { 
-    "esy-libtools": "github:bryphe/esy-libtools#62766a2"
+    "esy-libtools": "github:bryphe/esy-libtools#c9eb685"
   }
 }
