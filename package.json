@@ -1,6 +1,6 @@
 {
   "name": "@revery/esy-libvterm",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Esy-enabled libvterm build",
   "license": "MIT",
   "esy": {
@@ -26,6 +26,6 @@
     }
   },
   "dependencies": { 
-    "esy-libtools": "github:bryphe/esy-libtools#c9eb685"
+    "esy-libtools": "github:revery-ui/esy-libtools#c9eb685"
   }
 }
