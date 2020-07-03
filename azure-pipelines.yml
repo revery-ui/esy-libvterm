@@ -9,10 +9,10 @@ jobs:
   steps:
   - template: .ci/esy-build-steps.yml
 
-- job: MacOS13
+- job: MacOS15
   displayName: "MacOS Mojave"
   pool:
-    vmImage: 'macOS 10.13'
+    vmImage: 'macOS 10.15'
   steps:
   - script: brew update
   - script: brew install libtool
