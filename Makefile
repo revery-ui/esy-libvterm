@@ -1,13 +1,3 @@
-ifeq ($(shell uname),Darwin)
-  LIBTOOL ?= glibtool
-else
-  LIBTOOL ?= libtool
-endif
-
-ifneq ($(VERBOSE),1)
-  LIBTOOL +=--quiet
-endif
-
 override CFLAGS +=-Wall -Iinclude -std=c99 -Wpedantic
 
 ifeq ($(shell uname),SunOS)
@@ -25,8 +15,8 @@ endif
 
 CFILES=$(sort $(wildcard src/*.c))
 HFILES=$(sort $(wildcard include/*.h))
-OBJECTS=$(CFILES:.c=.lo)
-LIBRARY=libvterm.la
+OBJECTS=$(CFILES:.c=.o)
+LIBRARY=libvterm.a
 
 BINFILES_SRC=$(sort $(wildcard bin/*.c))
 BINFILES=$(BINFILES_SRC:.c=)
@@ -52,46 +42,46 @@ MANDIR=$(PREFIX)/share/man
 MAN3DIR=$(MANDIR)/man3
 
 all: $(LIBRARY) $(BINFILES)
-	@echo Using libtool $(LIBTOOL)
+	@echo Using cflags $(CFLAGS)
 
 $(LIBRARY): $(OBJECTS)
-	@echo LINK $@
-	@$(LIBTOOL) --mode=link --tag=CC $(CC) -rpath $(LIBDIR) -version-info $(VERSION_CURRENT):$(VERSION_REVISION):$(VERSION_AGE) -o $@ $^ $(LDFLAGS)
-
-src/%.lo: src/%.c $(HFILES_INT)
-	@echo CC $<
-	@$(LIBTOOL) --mode=compile --tag=CC $(CC) $(CFLAGS) -o $@ -c $<
+	@echo $(AR) $@
+	@$(AR) rcs $@ $^
 
 src/encoding/%.inc: src/encoding/%.tbl
 	@echo TBL $<
 	@perl -CSD tbl2inc_c.pl $< >$@
+
+src/%.o: src/%.c $(HFILES_INT) $(INCFILES)
+	@echo $(CC) $(CFLAGS) $<
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 src/fullwidth.inc:
 	@perl find-wide-chars.pl >$@
 
 src/encoding.lo: $(INCFILES)
 
-bin/%: bin/%.c $(LIBRARY)
-	@echo CC $<
-	@$(LIBTOOL) --mode=link --tag=CC $(CC) $(CFLAGS) -o $@ $< -lvterm $(LDFLAGS)
+# bin/%: bin/%.c $(LIBRARY)
+# 	@echo CC $<
+# 	@$(LIBTOOL) --mode=link --tag=CC $(CC) $(CFLAGS) -o $@ $< -lvterm $(LDFLAGS)
 
-t/harness.lo: t/harness.c $(HFILES)
-	@echo CC $<
-	@$(LIBTOOL) --mode=compile --tag=CC $(CC) $(CFLAGS) -o $@ -c $<
+# t/harness.lo: t/harness.c $(HFILES)
+# 	@echo CC $<
+# 	@$(LIBTOOL) --mode=compile --tag=CC $(CC) $(CFLAGS) -o $@ -c $<
 
-t/harness: t/harness.lo $(LIBRARY)
-	@echo LINK $@
-	@$(LIBTOOL) --mode=link --tag=CC $(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+# t/harness: t/harness.lo $(LIBRARY)
+# 	@echo LINK $@
+# 	@$(LIBTOOL) --mode=link --tag=CC $(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 .PHONY: test
 test: $(LIBRARY) t/harness
 	for T in `ls t/[0-9]*.test`; do echo "** $$T **"; perl t/run-test.pl $$T $(if $(VALGRIND),--valgrind) || exit 1; done
 
-.PHONY: clean
-clean:
-	$(LIBTOOL) --mode=clean rm -f $(OBJECTS) $(INCFILES)
-	$(LIBTOOL) --mode=clean rm -f t/harness.lo t/harness
-	$(LIBTOOL) --mode=clean rm -f $(LIBRARY) $(BINFILES)
+# .PHONY: clean
+# clean:
+# 	$(LIBTOOL) --mode=clean rm -f $(OBJECTS) $(INCFILES)
+# 	$(LIBTOOL) --mode=clean rm -f t/harness.lo t/harness
+# 	$(LIBTOOL) --mode=clean rm -f $(LIBRARY) $(BINFILES)
 
 .PHONY: install
 install: install-inc install-lib 
@@ -104,12 +94,11 @@ install-inc:
 
 install-lib: $(LIBRARY)
 	install -d $(DESTDIR)$(LIBDIR)
-	$(LIBTOOL) --mode=install install $(LIBRARY) $(DESTDIR)$(LIBDIR)/$(LIBRARY)
-	$(LIBTOOL) --mode=finish $(DESTDIR)$(LIBDIR)
+	cp $(LIBRARY) $(DESTDIR)$(LIBDIR)/$(LIBRARY)
 
-install-bin: $(BINFILES)
-	install -d $(DESTDIR)$(BINDIR)
-	$(LIBTOOL) --mode=install install $(BINFILES) $(DESTDIR)$(BINDIR)/
+# install-bin: $(BINFILES)
+# 	install -d $(DESTDIR)$(BINDIR)
+# 	$(LIBTOOL) --mode=install install $(BINFILES) $(DESTDIR)$(BINDIR)/
 
 # DIST CUT
 

@@ -3,9 +3,9 @@
 name: $(Build.SourceVersion)
 jobs:
 - job: Linux
-  displayName: "Linux - Ubuntu 16.04"
+  displayName: "Linux - Ubuntu 18.04"
   pool:
-    vmImage: 'Ubuntu 16.04'
+    vmImage: 'Ubuntu 18.04'
   steps:
   - template: .ci/esy-build-steps.yml
 

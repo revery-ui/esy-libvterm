@@ -1,31 +1,32 @@
 {
-  "name": "@revery/esy-libvterm",
-  "version": "1.0.3",
-  "description": "Esy-enabled libvterm build",
-  "license": "MIT",
-  "esy": {
-    "build": [
-        ["bash", "-c", "#{os == 'linux' ? 'CFLAGS=-fPIC' : ''} PREFIX=$cur__install #{os == 'windows' ? 'CC=x86_64-w64-mingw32-gcc' : ''} make install"]
-    ],
-    "install": [
-    ],
-    "buildsInSource":true,
-    "exportedEnv": {
-        "LIBVTERM_INCLUDE_PATH": {
-            "val": "#{self.install / 'include'}",
-            "scope": "global"
-        },
-        "LIBVTERM_LIB_PATH": {
-            "val": "#{self.lib}",
-            "scope": "global"
-        },
-        "LD_LIBRARY_PATH": {
-            "val": "#{self.lib : $LD_LIBRARY_PATH}",
-            "scope": "global"
+    "name": "@revery/esy-libvterm",
+    "version": "1.0.3",
+    "description": "Esy-enabled libvterm build",
+    "license": "MIT",
+    "esy": {
+        "build": [
+            [
+                "bash",
+                "-c",
+                "#{os == 'linux' ? 'CFLAGS=-fPIC' : ''} PREFIX=$cur__install #{os == 'windows' ? 'CC=x86_64-w64-mingw32-gcc' : 'CC=gcc'} #{os == 'windows' ? 'AR=x86_64-w64-mingw32-ar' : 'AR=ar'} make install"
+            ]
+        ],
+        "install": [],
+        "buildsInSource": true,
+        "exportedEnv": {
+            "LIBVTERM_INCLUDE_PATH": {
+                "val": "#{self.install / 'include'}",
+                "scope": "global"
+            },
+            "LIBVTERM_LIB_PATH": {
+                "val": "#{self.lib}",
+                "scope": "global"
+            },
+            "LD_LIBRARY_PATH": {
+                "val": "#{self.lib : $LD_LIBRARY_PATH}",
+                "scope": "global"
+            }
         }
-    }
-  },
-  "dependencies": { 
-    "esy-libtools": "github:revery-ui/esy-libtools#c9eb685"
-  }
+    },
+    "dependencies": {}
 }
