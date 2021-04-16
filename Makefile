@@ -54,7 +54,7 @@ src/encoding/%.inc: src/encoding/%.tbl
 
 src/%.o: src/%.c $(HFILES_INT) $(INCFILES)
 	@echo $(CC) $(CFLAGS) $<
-	@gcc $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 src/fullwidth.inc:
 	@perl find-wide-chars.pl >$@
