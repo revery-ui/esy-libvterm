@@ -8,7 +8,7 @@
             [
                 "bash",
                 "-c",
-                "#{os == 'linux' ? 'EXTRA_CFLAGS=-fPIC' : ''} PREFIX=$cur__install #{os == 'windows' ? 'CC=x86_64-w64-mingw32-gcc' : 'CC=gcc'} #{os == 'windows' ? 'AR=x86_64-w64-mingw32-ar' : 'AR=ar'} make install"
+                "#{os == 'linux' ? 'CFLAGS=-fPIC' : ''} PREFIX=$cur__install #{os == 'windows' ? 'CC=x86_64-w64-mingw32-gcc' : 'CC=gcc'} #{os == 'windows' ? 'AR=x86_64-w64-mingw32-ar' : 'AR=ar'} make install"
             ]
         ],
         "install": [],
