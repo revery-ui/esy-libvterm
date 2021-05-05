@@ -271,7 +271,7 @@ static int erase_internal(VTermRect rect, int selective, void *user)
     for(int col = rect.start_col; col < rect.end_col; col++) {
       ScreenCell *cell = getcell(screen, row, col);
 
-      if(selective && cell->pen.protected_cell)
+      if(!cell || (selective && cell->pen.protected_cell))
         continue;
 
       cell->chars[0] = 0;
